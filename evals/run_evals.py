@@ -2,7 +2,7 @@
 
     python evals/run_evals.py                      # both suites
     python evals/run_evals.py --suite search
-    python evals/run_evals.py --price-in 1 --price-cached 0.1 --price-out 5
+    python evals/run_evals.py --price-in 0.10 --price-cached 0.01 --price-out 0.50
 
 Prices are dollars per million tokens. They are flags, not constants, because
 prices change and a stale number in a cost report is worse than none.
@@ -56,7 +56,7 @@ def run_search(corpus, llm) -> tuple[list[dict], Usage]:
         answer = ask(case["question"], corpus, llm)
         secs = time.perf_counter() - start
         fails = search_failures(case, answer)
-        _add(total, answer.usage)
+        total.add(answer.usage)
         rows.append({"id": case["id"], "pass": not fails, "secs": secs,
                      "detail": "; ".join(fails) or "", "corrected": len(answer.corrected)})
         print(f"{'PASS' if not fails else 'FAIL'}  search/{case['id']}  {secs:.1f}s  {'; '.join(fails)}")
@@ -71,24 +71,19 @@ def run_decks(corpus, llm) -> tuple[list[dict], Usage]:
         try:
             draft = draft_deck(case["brief"], corpus, llm)
             attempts = draft.attempts
-            _add(total, draft.usage)
+            total.add(draft.usage)
             titles = [c["corpus_title"] for c in draft.content["cases"]]
             if not set(titles) & set(case["expect_any"]):
                 fails.append(f"expected one of {case['expect_any']}, got {titles}")
         except DeckError as e:
             fails.append(f"{e} {e.problems[:3]}")
         secs = time.perf_counter() - start
+        caught = draft.repaired if attempts > 1 else []
         rows.append({"id": case["id"], "pass": not fails, "secs": secs,
-                     "detail": "; ".join(fails) or (f"repaired after {attempts - 1} failed draft"
-                                                    if attempts > 1 else "")})
+                     "detail": "; ".join(fails) or ("first draft fixed after the check caught: "
+                                                    + "; ".join(caught) if caught else "")})
         print(f"{'PASS' if not fails else 'FAIL'}  deck/{case['id']}  {secs:.1f}s  {'; '.join(fails)}")
     return rows, total
-
-
-def _add(total: Usage, u: Usage) -> None:
-    total.input += u.input
-    total.cached += u.cached
-    total.output += u.output
 
 
 def report(model: str, suites: dict, prices: tuple | None) -> str:
@@ -98,10 +93,12 @@ def report(model: str, suites: dict, prices: tuple | None) -> str:
         secs = sorted(r["secs"] for r in rows)
         lines += [f"## {name}: {passed}/{len(rows)} passed", "",
                   f"Median latency {secs[len(secs) // 2]:.1f}s. Tokens: {usage.input:,} input "
-                  f"({usage.cached:,} cached), {usage.output:,} output."]
+                  f"({usage.cached:,} read from cache), {usage.output:,} output."]
         if prices:
             p_in, p_cached, p_out = prices
-            cost = ((usage.input - usage.cached) * p_in + usage.cached * p_cached
+            # Anthropic bills cache writes at 1.25x the input price.
+            plain = usage.input - usage.cached - usage.written
+            cost = (plain * p_in + usage.written * p_in * 1.25 + usage.cached * p_cached
                     + usage.output * p_out) / 1e6
             lines.append(f"Cost: ${cost:.3f} total, ${cost / len(rows):.4f} per question.")
         lines += ["", "| Case | Result | Seconds | Notes |", "|---|---|---|---|"]

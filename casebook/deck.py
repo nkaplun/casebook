@@ -31,6 +31,7 @@ class DeckDraft:
     content: dict
     attempts: int
     usage: Usage = field(default_factory=Usage)
+    repaired: list[str] = field(default_factory=list)  # problems found in earlier drafts
 
 
 def draft_deck(brief: str, corpus: Corpus, llm: LLM) -> DeckDraft:
@@ -38,12 +39,11 @@ def draft_deck(brief: str, corpus: Corpus, llm: LLM) -> DeckDraft:
     problems if validation fails. Raises DeckError if it still fails."""
     messages = [{"role": "user", "content": f"PROSPECT BRIEF:\n{brief}"}]
     total = Usage()
+    repaired: list[str] = []
     for attempt in range(1, MAX_REPAIRS + 2):
         result = llm.complete(prompts.DECK_SYSTEM, corpus.context(brief), messages,
                               max_tokens=3000)
-        total.input += result.usage.input
-        total.cached += result.usage.cached
-        total.output += result.usage.output
+        total.add(result.usage)
         content = parse_json(result.text)
         if not content:
             problems = ["The response was not valid JSON."]
@@ -52,7 +52,8 @@ def draft_deck(brief: str, corpus: Corpus, llm: LLM) -> DeckDraft:
         else:
             problems = validate_deck(content, corpus)
             if not problems:
-                return DeckDraft(content, attempts=attempt, usage=total)
+                return DeckDraft(content, attempts=attempt, usage=total, repaired=repaired)
+        repaired += problems
         messages += [
             {"role": "assistant", "content": result.text or "{}"},
             {"role": "user", "content": "Fix these problems and return the full JSON "

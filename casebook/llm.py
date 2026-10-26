@@ -17,9 +17,16 @@ from typing import Protocol
 
 @dataclass
 class Usage:
-    input: int = 0
-    cached: int = 0
+    input: int = 0   # all input tokens, cached ones included
+    cached: int = 0  # the part of `input` read from the prompt cache
     output: int = 0
+    written: int = 0  # the part of `input` written to the cache (billed at a premium)
+
+    def add(self, other: "Usage") -> None:
+        self.input += other.input
+        self.cached += other.cached
+        self.output += other.output
+        self.written += other.written
 
 
 @dataclass
@@ -55,9 +62,12 @@ class AnthropicLLM:
             messages=messages,
             **kwargs,
         )
+        # Anthropic reports cache reads and writes separately from input_tokens;
+        # Usage.input is the total, matching OpenAI's convention.
         u = resp.usage
-        usage = Usage(u.input_tokens, getattr(u, "cache_read_input_tokens", 0) or 0,
-                      u.output_tokens)
+        cached = getattr(u, "cache_read_input_tokens", 0) or 0
+        written = getattr(u, "cache_creation_input_tokens", 0) or 0
+        usage = Usage(u.input_tokens + cached + written, cached, u.output_tokens, written)
         for b in resp.content:
             if b.type == "tool_use":
                 return Completion(tool_call={"name": b.name, "input": dict(b.input or {})},
