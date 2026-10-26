@@ -94,7 +94,7 @@ On `claude-haiku-5-5`, October 2026 ([full report](docs/eval_results.md)):
 | Search (13 questions, including 4 traps) | 13/13 | 3.4 s | $0.0004 |
 | Decks (3 prospect briefs) | 3/3 | 15.1 s | $0.0022 |
 
-98% of input tokens were read from the prompt cache.
+97% of input tokens were read from the prompt cache.
 
 All three first drafts of a deck failed validation, every time because a caption or bullet ran past its box on the slide (for example, a 56-character caption in a 48-character box). Each was fixed in the repair round. This is why the length check exists: the model was told the limits and still went over them in every deck.
 
