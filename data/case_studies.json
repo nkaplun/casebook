@@ -1,0 +1,130 @@
+[
+  {
+    "title": "Real-Time Fraud Scoring for a Payments Processor",
+    "industry": "FinTech / Payments",
+    "client": "Ledgerline Payments",
+    "link": "https://example.com/cases/ledgerline-fraud-scoring",
+    "nda": "No",
+    "text": "Industry: FinTech / Payments | Client: Ledgerline Payments\nTechnologies: Python, Kafka, XGBoost, Redis, AWS EKS, Grafana\nBusiness Challenge: Ledgerline's rules-based fraud engine flagged too many legitimate transactions and missed new attack patterns. Analysts reviewed 40,000 alerts a week by hand, and chargebacks were rising.\nApproach: Brightline replaced the batch rules with a streaming scoring service. Transactions flow through Kafka, features are served from Redis, and a gradient-boosted model scores each payment in under 50 ms. Analysts label disputed cases in a review tool, and the model retrains weekly on those labels.\nKey Results:\n- 38% fewer chargebacks in the first two quarters\n- False-positive alerts cut from 40,000 to 11,000 per week\n- p99 scoring latency of 42 ms at 3,000 transactions per second"
+  },
+  {
+    "title": "Loan Origination Platform Rebuild for a Digital Lender",
+    "industry": "FinTech / Lending",
+    "client": "Harborview Lending",
+    "link": "https://example.com/cases/harborview-loan-origination",
+    "nda": "No",
+    "text": "Industry: FinTech / Lending | Client: Harborview Lending\nTechnologies: Java, Spring Boot, PostgreSQL, Temporal, React, AWS\nBusiness Challenge: Harborview ran loan applications through a vendor platform that was expensive to license, slow to change, and required manual re-keying of borrower data into three downstream systems.\nApproach: Brightline built a custom origination platform in phases. Long-running loan workflows run on Temporal, credit bureau and income verification APIs are integrated directly, and an admin console lets the operations team change underwriting steps without a code release.\nKey Results:\n- 45% lower annual platform cost after retiring the vendor license\n- Average time from application to decision cut from 9 days to 3 days\n- Manual data re-entry eliminated across 3 downstream systems"
+  },
+  {
+    "title": "Customer Support Assistant for a Neobank",
+    "industry": "FinTech / Banking",
+    "client": "US Neobank (NDA)",
+    "link": "",
+    "nda": "Yes",
+    "text": "Industry: FinTech / Banking | Client: US Neobank (NDA)\nTechnologies: Python, FastAPI, Claude API, PostgreSQL, Zendesk API\nBusiness Challenge: A fast-growing neobank's support team could not keep up with ticket volume. Half of incoming tickets were questions already answered in the help center, but agents still wrote every reply by hand.\nApproach: Brightline built an assistant that drafts replies from the bank's help-center articles and account policies, with a citation to the source article on every draft. Agents approve or edit each draft inside Zendesk. An evaluation suite of 300 real tickets runs before every prompt change.\nKey Results:\n- 52% of tickets resolved with an agent-approved draft and no rewrite\n- Median first-response time cut from 6 hours to 40 minutes\n- Zero drafts sent without human approval"
+  },
+  {
+    "title": "Personalized Product Recommendations for an Outdoor Retailer",
+    "industry": "Retail / E-commerce",
+    "client": "Summit & Trail",
+    "link": "https://example.com/cases/summit-trail-recommendations",
+    "nda": "No",
+    "text": "Industry: Retail / E-commerce | Client: Summit & Trail\nTechnologies: Python, PyTorch, BigQuery, Vertex AI, Shopify Plus\nBusiness Challenge: Summit & Trail showed the same best-sellers to every shopper. Repeat purchase rates were flat, and the merchandising team spent hours each week hand-picking product carousels.\nApproach: Brightline trained a two-tower recommendation model on three years of order and browsing history, served through Vertex AI. The team ran a six-week A/B test against the hand-picked carousels before the full rollout.\nKey Results:\n- 14% lift in average order value in the A/B test\n- 9% increase in repeat purchase rate over two quarters\n- Merchandising team saved about 12 hours per week"
+  },
+  {
+    "title": "Mobile App Rewrite for a Specialty Grocery Chain",
+    "industry": "Retail / Grocery",
+    "client": "Greenleaf Market",
+    "link": "https://example.com/cases/greenleaf-mobile-app",
+    "nda": "No",
+    "text": "Industry: Retail / Grocery | Client: Greenleaf Market\nTechnologies: Flutter, Dart, Firebase, Node.js, Stripe\nBusiness Challenge: Greenleaf's separate iOS and Android apps had drifted apart in features, crashed often, and took two teams to maintain. App store ratings had fallen below 3 stars.\nApproach: Brightline rebuilt both apps as one Flutter codebase with a shared design system, added curbside pickup ordering, and set up automated release builds with crash reporting.\nKey Results:\n- App store rating raised from 2.8 to 4.6 stars\n- Crash-free sessions improved from 96.1% to 99.7%\n- Curbside pickup grew to 18% of online orders within six months"
+  },
+  {
+    "title": "Inventory Forecasting for a Multi-Brand Apparel Retailer",
+    "industry": "Retail / Apparel",
+    "client": "Threadhouse Group",
+    "link": "",
+    "nda": "No",
+    "text": "Industry: Retail / Apparel | Client: Threadhouse Group\nTechnologies: Python, LightGBM, Snowflake, dbt, Airflow\nBusiness Challenge: Threadhouse planned inventory in spreadsheets for 400 stores. Popular sizes sold out while slow sellers were marked down at the end of each season.\nApproach: Brightline built store-and-size-level demand forecasts in Snowflake, orchestrated with Airflow, and a replenishment report that planners review each Monday. Forecast accuracy is tracked against actual sales every week.\nKey Results:\n- 21% reduction in end-of-season markdowns\n- Stockouts on top-selling sizes down 30%\n- Forecasts cover 400 stores and 12,000 SKUs"
+  },
+  {
+    "title": "Clinical Trial Document Search for a Biotech Company",
+    "industry": "Life Sciences / Biotech",
+    "client": "Corvane Therapeutics",
+    "link": "https://example.com/cases/corvane-document-search",
+    "nda": "No",
+    "text": "Industry: Life Sciences / Biotech | Client: Corvane Therapeutics\nTechnologies: Python, Elasticsearch, OpenAI API, Azure, SharePoint\nBusiness Challenge: Corvane's clinical team spent hours searching thousands of protocol documents, amendments, and site reports stored across SharePoint folders to answer regulator questions.\nApproach: Brightline indexed the document library with hybrid keyword and semantic search and built an assistant that answers questions with links to the exact page of each source document. Answers without a supporting source are refused.\nKey Results:\n- Time to answer a regulator question cut from 2 days to 3 hours\n- 25,000 documents indexed across 14 trials\n- Every answer links to a source page"
+  },
+  {
+    "title": "Patient Intake Automation for a Clinic Network",
+    "industry": "Healthcare / Provider",
+    "client": "US Clinic Network (NDA)",
+    "link": "",
+    "nda": "Yes",
+    "text": "Industry: Healthcare / Provider | Client: US Clinic Network (NDA)\nTechnologies: Python, AWS Textract, HL7 FHIR, n8n, PostgreSQL\nBusiness Challenge: Front-desk staff at 35 clinics typed insurance cards and intake forms into the electronic health record by hand, causing check-in delays and claim denials from typos.\nApproach: Brightline built an intake pipeline that reads scanned forms and insurance cards, checks the extracted fields against the payer's eligibility API, and writes verified records to the health record system through FHIR. Low-confidence fields go to a staff review queue.\nKey Results:\n- Check-in time reduced by 7 minutes per patient\n- Claim denials from data-entry errors down 60%\n- Rolled out to 35 clinics in four months"
+  },
+  {
+    "title": "Remote Monitoring Platform for a Medical Device Maker",
+    "industry": "Life Sciences / Medical Devices",
+    "client": "Pulsewise Medical",
+    "link": "https://example.com/cases/pulsewise-remote-monitoring",
+    "nda": "No",
+    "text": "Industry: Life Sciences / Medical Devices | Client: Pulsewise Medical\nTechnologies: Kotlin, Swift, AWS IoT Core, TimescaleDB, React\nBusiness Challenge: Pulsewise's heart monitors stored readings on the device, so physicians only saw data when patients came in for appointments.\nApproach: Brightline built companion mobile apps that sync device readings over Bluetooth, a cloud pipeline on AWS IoT Core, and a physician dashboard that flags abnormal readings. The team supported the client's regulatory documentation for the software.\nKey Results:\n- Physicians see readings within 5 minutes instead of at the next visit\n- 22,000 patients enrolled in the first year\n- 99.95% data delivery rate from device to dashboard"
+  },
+  {
+    "title": "Route Optimization for a Regional Delivery Fleet",
+    "industry": "Logistics / Last-Mile Delivery",
+    "client": "Crossroads Freight",
+    "link": "https://example.com/cases/crossroads-route-optimization",
+    "nda": "No",
+    "text": "Industry: Logistics / Last-Mile Delivery | Client: Crossroads Freight\nTechnologies: Python, Google OR-Tools, PostgreSQL, PostGIS, React Native\nBusiness Challenge: Dispatchers at Crossroads planned routes for 220 trucks by hand each morning. Routes overlapped, drivers ran overtime, and late deliveries were common.\nApproach: Brightline built a routing service that plans all routes overnight with time windows and truck capacity, plus a driver app that re-plans the rest of the route when a stop is delayed.\nKey Results:\n- 17% fewer miles driven per delivery\n- On-time delivery rate improved from 86% to 97%\n- Morning planning time cut from 3 hours to 20 minutes"
+  },
+  {
+    "title": "Warehouse Management System Modernization",
+    "industry": "Logistics / Warehousing",
+    "client": "Northgate Distribution",
+    "link": "",
+    "nda": "No",
+    "text": "Industry: Logistics / Warehousing | Client: Northgate Distribution\nTechnologies: .NET, Azure, SQL Server, Kubernetes, React\nBusiness Challenge: Northgate's 15-year-old warehouse system ran on a single on-premise server. Peak-season slowdowns stopped picking for hours at a time, and adding a new warehouse took months.\nApproach: Brightline moved the system to Azure one module at a time, starting with receiving and picking, while the old system kept running. Each warehouse was cut over on a weekend with a rollback plan.\nKey Results:\n- Zero hours of peak-season downtime after migration\n- New warehouse onboarding cut from 4 months to 3 weeks\n- Infrastructure cost down 28%"
+  },
+  {
+    "title": "Streaming Video Platform Scale-Up for a Sports Network",
+    "industry": "Media / Streaming",
+    "client": "Fieldhouse Sports Network",
+    "link": "https://example.com/cases/fieldhouse-streaming",
+    "nda": "No",
+    "text": "Industry: Media / Streaming | Client: Fieldhouse Sports Network\nTechnologies: Go, AWS MediaLive, CloudFront, DynamoDB, Terraform\nBusiness Challenge: Fieldhouse's streaming service crashed during its two biggest live events of the year, when traffic jumped to ten times normal within minutes.\nApproach: Brightline rebuilt the playback and entitlement services in Go, moved video delivery to a multi-CDN setup, and ran load tests at 15 times expected peak before each major event.\nKey Results:\n- 1.2 million concurrent viewers served at the championship final with no outage\n- Video start time cut from 6.5 seconds to 1.8 seconds\n- Infrastructure scales up automatically ahead of scheduled events"
+  },
+  {
+    "title": "Content Tagging with Machine Learning for a Publisher",
+    "industry": "Media / Publishing",
+    "client": "Brookfield Press Digital",
+    "link": "",
+    "nda": "No",
+    "text": "Industry: Media / Publishing | Client: Brookfield Press Digital\nTechnologies: Python, Hugging Face Transformers, AWS SageMaker, Elasticsearch\nBusiness Challenge: Editors tagged 600 articles a day by hand. Tags were inconsistent, so related-article links and topic pages were weak and search traffic was flat.\nApproach: Brightline fine-tuned a text classifier on 200,000 previously tagged articles and built a tagging step into the publishing tool. Editors confirm or change the suggested tags before publishing.\nKey Results:\n- 91% of suggested tags accepted by editors without changes\n- Organic search traffic to topic pages up 33%\n- About 25 editor hours saved per week"
+  },
+  {
+    "title": "Claims Processing Automation for an Insurance Carrier",
+    "industry": "Insurance",
+    "client": "US Insurance Carrier (NDA)",
+    "link": "",
+    "nda": "Yes",
+    "text": "Industry: Insurance | Client: US Insurance Carrier (NDA)\nTechnologies: Python, Claude API, AWS Step Functions, DynamoDB, Guidewire\nBusiness Challenge: Adjusters spent most of their time reading claim documents and copying details into Guidewire. Simple auto-glass claims waited in the same queue as complex injury claims.\nApproach: Brightline built a document-reading step that extracts claim details with a large language model, checks each extracted value against the policy record, and routes simple claims to a fast-track queue. Every extraction is logged with its source text for audit.\nKey Results:\n- 40% of auto-glass claims settled same day\n- Adjuster time per simple claim cut from 45 minutes to 10 minutes\n- Extraction accuracy of 97% on a 1,000-claim audit set"
+  },
+  {
+    "title": "Energy Usage Analytics for a Utility Company",
+    "industry": "Energy / Utilities",
+    "client": "Clearwater Power",
+    "link": "https://example.com/cases/clearwater-energy-analytics",
+    "nda": "No",
+    "text": "Industry: Energy / Utilities | Client: Clearwater Power\nTechnologies: Python, Apache Spark, Databricks, Power BI, Azure\nBusiness Challenge: Clearwater collected smart-meter readings from 900,000 homes but could only report on them monthly. Demand spikes surprised grid operators, and customers had no view of their own usage.\nApproach: Brightline built a Databricks pipeline that processes meter readings every 15 minutes, a demand forecast for grid operators, and a usage view in the customer web portal.\nKey Results:\n- Day-ahead demand forecast error reduced to 3.5%\n- 120,000 customers enrolled in peak-time savings within a year\n- Meter data available in 15 minutes instead of monthly"
+  },
+  {
+    "title": "Internal Knowledge Assistant for a Software Consultancy",
+    "industry": "Professional Services",
+    "client": "Brightline Engineering (internal)",
+    "link": "",
+    "nda": "No",
+    "text": "Industry: Professional Services | Client: Brightline Engineering (internal)\nTechnologies: Python, FastAPI, Claude API, Slack Bolt, Google Drive API, Google Cloud Run\nBusiness Challenge: Brightline's sales team could not quickly find which past projects matched a prospect's needs. Case studies lived in scattered documents, and salespeople asked engineers in Slack instead.\nApproach: Brightline built a Slack assistant that answers questions over every published case study, with a link to each source. An evaluation suite built from real sales questions runs before every deploy, and a check blocks any answer that names a case study not in the library.\nKey Results:\n- Answers in under 10 seconds instead of a day of Slack back-and-forth\n- Covers 100% of published case studies\n- Zero invented case studies reached users after the check shipped"
+  }
+]

@@ -1,0 +1,8 @@
+[
+  {"id": "regional-bank", "brief": "Acme Bank is a regional bank. Fraud losses are rising and their loan approvals take two weeks. They want to see what we have done in payments and lending.",
+   "expect_any": ["Real-Time Fraud Scoring for a Payments Processor", "Loan Origination Platform Rebuild for a Digital Lender"]},
+  {"id": "health-system", "brief": "Mesa Health runs 20 urgent care clinics. Front-desk staff re-type insurance cards and check-in is slow. They are also curious about AI for support.",
+   "expect_any": ["Patient Intake Automation for a Clinic Network"]},
+  {"id": "retailer", "brief": "Pinecrest Outfitters, an outdoor retailer with 120 stores, keeps running out of popular sizes and wants better online recommendations.",
+   "expect_any": ["Inventory Forecasting for a Multi-Brand Apparel Retailer", "Personalized Product Recommendations for an Outdoor Retailer"]}
+]
